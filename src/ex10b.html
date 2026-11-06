@@ -1,0 +1,79 @@
+﻿<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Exercice 10b – Gestion du stock informatique</title>
+        <style>
+            * { box-sizing: border-box; }
+            body { margin: 0; background: #f3f6fa; color: #203047; font-family: Arial, sans-serif; line-height: 1.5; }
+            header { background: #16324f; color: white; padding: 28px 4%; }
+            header p { margin: 4px 0; color: #c9d9e9; }
+            h1 { margin: 0; font-size: 1.8rem; }
+            main { max-width: 1600px; margin: auto; padding: 24px 4%; }
+            h2 { font-size: 1.15rem; margin-top: 0; }
+            .indicateurs { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 16px; margin-bottom: 24px; }
+            .carte, section { background: white; border: 1px solid #dce3ec; border-radius: 10px; padding: 20px; }
+            .carte span { display: block; color: #52647b; font-size: .9rem; }
+            .carte strong { display: block; margin-top: 8px; font-size: 1.5rem; color: #12695a; }
+            section { margin-bottom: 20px; }
+            .filtres { display: flex; flex-wrap: wrap; gap: 16px; align-items: end; }
+            label { display: block; font-weight: bold; font-size: .9rem; }
+            input, select, button { font: inherit; padding: 8px; border: 1px solid #aebccd; border-radius: 5px; background: white; color: #203047; }
+            .filtres input { width: 280px; max-width: 100%; }
+            button { cursor: pointer; background: #16324f; color: white; }
+            :focus-visible { outline: 3px solid #16877b; outline-offset: 2px; }
+            .tableau { overflow-x: auto; }
+            table { border-collapse: collapse; width: 100%; font-size: .9rem; }
+            caption { text-align: left; padding: 0 0 12px; color: #52647b; }
+            th, td { text-align: left; padding: 12px 9px; border-bottom: 1px solid #e3e9f0; }
+            th { background: #edf2f7; white-space: nowrap; }
+            td select { max-width: 145px; }
+            td small { display: block; color: #52647b; }
+            #idCategories { display: flex; flex-wrap: wrap; gap: 12px 28px; padding-left: 20px; }
+            footer { padding: 0 4% 24px; color: #52647b; font-size: .85rem; }
+            footer img { display: block; width: 230px; max-width: 100%; margin-top: 16px; }
+        </style>
+        <script src="ex10.js" defer></script>
+    </head>
+    <body>
+        <header>
+            <p>EMF · Module 323 · Exercice 10b</p>
+            <h1>Gestion du stock informatique</h1>
+            <p>Consulter le parc, suivre sa valeur et actualiser les équipements.</p>
+        </header>
+        <main>
+            <div class="indicateurs" aria-live="polite">
+                <div class="carte"><span>Équipements du parc</span><strong id="idNombre">0</strong></div>
+                <div class="carte"><span>Valeur totale du parc</span><strong id="idValeur">0 CHF</strong></div>
+                <div class="carte"><span>Valeur du stock disponible</span><strong id="idDisponible">0 CHF</strong></div>
+                <div class="carte"><span>Portables disponibles</span><strong id="idPortables">0 CHF</strong></div>
+                <div class="carte"><span>Équipements à réparer</span><strong id="idReparations">0</strong></div>
+            </div>
+            <section aria-labelledby="titreFiltres">
+                <h2 id="titreFiltres">Rechercher dans le parc</h2>
+                <div class="filtres">
+                    <div><label for="idCategorie">Catégorie</label><select id="idCategorie"><option value="">Toutes les catégories</option></select></div>
+                    <div><label for="idEtat">État</label><select id="idEtat"><option value="">Tous les états</option></select></div>
+                    <div><label for="idRecherche">Désignation ou marque</label><input id="idRecherche" type="search" placeholder="Ex. : Lenovo, poste…" /></div>
+                    <button id="idReinitialiser" type="button">Effacer les filtres</button>
+                </div>
+            </section>
+            <section aria-labelledby="titreParc">
+                <h2 id="titreParc">Équipements</h2>
+                <div class="tableau">
+                    <table>
+                        <caption id="idResultats" aria-live="polite"></caption>
+                        <thead><tr><th scope="col">ID</th><th scope="col">Désignation / modèle</th><th scope="col">Catégorie</th><th scope="col">Prix</th><th scope="col">Acquisition</th><th scope="col">Emplacement</th><th scope="col">État</th><th scope="col">Disponibilité</th></tr></thead>
+                        <tbody id="idEquipements"></tbody>
+                    </table>
+                </div>
+            </section>
+            <section aria-labelledby="titreCategories"><h2 id="titreCategories">Répartition du parc par catégorie</h2><ul id="idCategories"></ul></section>
+            <section aria-labelledby="titreReparations"><h2 id="titreReparations">Équipements nécessitant une réparation</h2><p id="idListeReparations"></p></section>
+        </main>
+        <footer>Les statistiques portent sur tout le parc. Les modifications sont conservées jusqu’au rechargement de la page.
+            <img src="../res/EMF_logo_RVB_Info_long.png" alt="École des métiers de Fribourg – Informatique" />
+        </footer>
+    </body>
+</html>
